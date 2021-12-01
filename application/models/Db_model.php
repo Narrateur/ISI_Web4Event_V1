@@ -142,7 +142,7 @@ class Db_model extends CI_Model{
     //-----------------------------------------ORGANISTEUR------------------------------------------
     //----------------------------------------------------------------------------------------------
     public function get_organisateur($cpt_pseudo){
-        $query = $this->db->query("SELECT org_nom, org_prenom, org_mail, cpt_pseudo FROM t_organistauer_org WHERE cpt_pseudo = '".$cpt_pseudo."';");
+        $query = $this->db->query("SELECT org_nom, org_prenom, org_mail, cpt_pseudo FROM t_organisateur_org WHERE cpt_pseudo = '".$cpt_pseudo."';");
         return $query->row();
     }
 
