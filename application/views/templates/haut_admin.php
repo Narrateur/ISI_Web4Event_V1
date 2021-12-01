@@ -43,7 +43,7 @@
 		  <div class="collapse navbar-collapse text-center" id="navbarsExample09">
 			<ul class="navbar-nav ml-auto">
 
-				<li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/animation/tout_afficher">LES COMPTES</a></li>
+				<li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/">LES COMPTES</a></li>
 
 				<li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/animation/tout_afficher_admin">LES ANIMATIONS</a></li>
 

@@ -106,7 +106,7 @@ class Compte extends CI_Controller {
     public function afficher($cpt_pseudo){
         
         if($this->session->userdata('statut') == 'I'){
-            $data['infos'] = $this->db_model->get_invite_alone($cpt_pseudo);
+            $data['infos'] = $this->db_model->get_invite($cpt_pseudo);
         }else if($this->session->userdata('statut') == 'O'){
             $data['infos'] = $this->db_model->get_organisateur($cpt_pseudo);
         }

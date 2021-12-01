@@ -102,7 +102,7 @@ class Db_model extends CI_Model{
 
     //renvoie les infos d'une animation donné
     public function get_animation($id_animation){
-        $query = $this->db->query("SELECT ani_id, ani_libelle, ani_description, ani_horaireDebut, ani_horaireFin, lie_libelle, invite_animation(ani_id) AS invite, animation_etat(ani_id) as etat FROM t_animation_ani JOIN t_lieu_lie USING(lie_id) WHERE ani_id = ".$id_animation.";");
+        $query = $this->db->query("SELECT ani_id, ani_libelle, ani_description, ani_horaireDebut, ani_horaireFin, lie_id, lie_libelle, invite_animation(ani_id) AS invite, animation_etat(ani_id) as etat FROM t_animation_ani JOIN t_lieu_lie USING(lie_id) WHERE ani_id = ".$id_animation.";");
         return $query->row();
     }
 
@@ -134,14 +134,15 @@ class Db_model extends CI_Model{
 
     //renvoie toutes les infos d'un invité (url, passeport, post)
     public function get_invite($pseudo){
-        $query = $this->db->query("SELECT inv_nom, inv_description, inv_image, cpt_pseudo, url_lien, pst_text, pst_date, pst_etat FROM t_url_url JOIN tj_posseder_psd USING(url_id) RIGHT OUTER JOIN t_invite_inv USING(cpt_pseudo) LEFT OUTER JOIN t_passeport_pas USING(cpt_pseudo) LEFT OUTER JOIN t_post_pst USING(pas_id) WHERE cpt_pseudo = '".$pseudo."' ORDER BY pst_date DESC;");
+        $query = $this->db->query("SELECT inv_nom, inv_description, inv_image, cpt_pseudo, url_lien, pas_id, pas_login, pas_etat, pst_text, pst_date, pst_etat FROM t_url_url JOIN tj_posseder_psd USING(url_id) RIGHT OUTER JOIN t_invite_inv USING(cpt_pseudo) LEFT OUTER JOIN t_passeport_pas USING(cpt_pseudo) LEFT OUTER JOIN t_post_pst USING(pas_id) WHERE cpt_pseudo = '".$pseudo."' ORDER BY pst_date DESC;");
         return $query->result_array();
     }
 
+    /*
     public function get_invite_alone($cpt_pseudo){
-        $query = $this->db->query("SELECT inv_nom, inv_description, inv_image, cpt_pseudo FROM t_invite_inv WHERE cpt_pseudo = '".$cpt_pseudo."' ;");
+        $query = $this->db->query("SELECT inv_nom, inv_description, inv_image, cpt_pseudo, url_lien, pas_id, pas_login, pas_etat, pst_text, pst_date, pst_etat FROM t_url_url JOIN tj_posseder_psd USING(url_id) RIGHT OUTER JOIN t_invite_inv USING(cpt_pseudo) LEFT OUTER JOIN t_passeport_pas USING(cpt_pseudo) LEFT OUTER JOIN t_post_pst USING(pas_id) WHERE cpt_pseudo = '".$cpt_pseudo."' ;");
         return $query->row();
-    }
+    }*/
 
     //----------------------------------------------------------------------------------------------
     //-----------------------------------------ORGANISTEUR------------------------------------------
