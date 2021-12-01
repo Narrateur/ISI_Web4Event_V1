@@ -67,6 +67,8 @@
 
 				<li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/invite/galerie">Nos Invités</a></li>
 
+			   <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/lieu/tout_afficher">Lieux</a></li>
+
 				<!--
 			  	<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
@@ -79,7 +81,7 @@
 			   	
 			   <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/objet_trouve/tout_afficher">Objets Trouvés</a></li>
 
-			   <?php if($this->session->userdata('statut') != null) echo"<li class='nav-item'><a class='nav-link' href='".base_url()."index.php/compte/afficher/".$this->session->userdata('username')."'>Mon Compte<br>".$this->session->userdata('username')."</a></li>"; ?>
+			   
 			</ul> 
 
 

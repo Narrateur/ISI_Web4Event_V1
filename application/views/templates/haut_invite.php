@@ -47,6 +47,8 @@
 
 				<li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/invite/galerie">Post</a></li>
 
+        <?php if($this->session->userdata('statut') != null) echo"<li class='nav-item'><a class='nav-link' href='".base_url()."index.php/compte/afficher/".$this->session->userdata('username')."'>Mon Compte<br>".$this->session->userdata('username')."</a></li>"; ?>
+
 		  </div>
 		</div>
 	</nav>

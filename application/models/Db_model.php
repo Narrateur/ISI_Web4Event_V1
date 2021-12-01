@@ -151,7 +151,7 @@ class Db_model extends CI_Model{
     //---------------------------------------------LIEU---------------------------------------------
     //----------------------------------------------------------------------------------------------
     public function get_all_lieu(){
-        $query = $this->db->query("SELECT lie_id, lie_libelle, lie_adresse, srv_id, srv_nom FROM t_lieu_lie JOIN t_service_srv USING(lie_id);");
+        $query = $this->db->query("SELECT lie_id, lie_libelle, lie_adresse, srv_id, srv_nom FROM t_lieu_lie LEFT OUTER JOIN t_service_srv USING(lie_id) ORDER BY lie_libelle;");
         return $query->result_array();
     }
 

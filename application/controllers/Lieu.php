@@ -14,6 +14,14 @@ class Lieu extends CI_Controller {
         $this->load->view('lieu_afficher',$data);
         $this->load->view('templates/bas');
     }
+
+    //affiche tout les lieux
+    public function tout_afficher(){
+        $data['lieu_infos'] = $this->db_model->get_all_lieu();
+        $this->load->view('templates/haut');
+        $this->load->view('lieu_tout_afficher',$data);
+        $this->load->view('templates/bas');        
+    }
 }
 
 ?>
