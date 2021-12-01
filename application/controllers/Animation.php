@@ -23,4 +23,13 @@ class Animation extends CI_Controller {
         $this->load->view('animation_afficher',$data);
         $this->load->view('templates/bas');
     }
+
+    public function tout_afficher_admin(){
+        $data['titre'] = 'Liste des Animations :';
+        $data['animation'] = $this->db_model->get_all_animation();
+        $this->load->view('templates/haut');
+        $this->load->view('animation_tout_afficher_admin',$data);
+        $this->load->view('templates/bas');
+
+    }
 }
