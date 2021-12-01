@@ -127,6 +127,11 @@ class Db_model extends CI_Model{
         return $query->result_array();
     }
 
+    public function get_all_invite_infos_animation($ani_id){
+        $query = $this->db->query("SELECT inv_nom, inv_description, inv_image, cpt_pseudo, url_lien, pst_text, pst_date, pst_etat FROM t_url_url JOIN tj_posseder_psd USING(url_id) RIGHT OUTER JOIN t_invite_inv USING(cpt_pseudo) LEFT OUTER JOIN t_passeport_pas USING(cpt_pseudo) LEFT OUTER JOIN t_post_pst USING(pas_id) WHERE cpt_pseudo in(SELECT cpt_pseudo FROM tj_intervenir_itv WHERE ani_id = ".$ani_id.") ORDER BY pst_date DESC;");
+        return $query->result_array();
+    }
+
     //renvoie toutes les infos d'un invité (url, passeport, post)
     public function get_invite($pseudo){
         $query = $this->db->query("SELECT inv_nom, inv_description, inv_image, cpt_pseudo, url_lien, pst_text, pst_date, pst_etat FROM t_url_url JOIN tj_posseder_psd USING(url_id) RIGHT OUTER JOIN t_invite_inv USING(cpt_pseudo) LEFT OUTER JOIN t_passeport_pas USING(cpt_pseudo) LEFT OUTER JOIN t_post_pst USING(pas_id) WHERE cpt_pseudo = '".$pseudo."' ORDER BY pst_date DESC;");
@@ -156,7 +161,7 @@ class Db_model extends CI_Model{
     }
 
     public function get_lieu($lie_id){
-        $query = $this->db->query("SELECT lie_id, lie_libelle, lie_adresse, srv_id, srv_nom FROM t_lieu_lie JOIN t_service_srv USING(lie_id) WHERE lie_id = ".$lie_id.";");
+        $query = $this->db->query("SELECT lie_id, lie_libelle, lie_adresse, srv_id, srv_nom FROM t_lieu_lie LEFT OUTER JOIN t_service_srv USING(lie_id) WHERE lie_id = ".$lie_id.";");
         return $query->result_array();
     }
 

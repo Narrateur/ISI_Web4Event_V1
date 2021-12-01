@@ -118,6 +118,7 @@ class Compte extends CI_Controller {
     //detruit la session pour redirige vers l'accueil
     public function deconnecter(){
         session_destroy();
+        header("Refresh:0");
         redirect(base_url()."index.php");
     }
 }

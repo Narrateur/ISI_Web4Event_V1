@@ -19,7 +19,10 @@ class Invite extends CI_Controller {
 
     //affiche tout les invité d'une animation précise
     public function galerie_animation($ani_id){
-
+        $data['invite_info'] = $this->db_model->get_all_invite_infos_animation($ani_id);
+        $this->load->view('templates/haut');
+        $this->load->view('invite_galerie_animation',$data);
+        $this->load->view('templates/bas');
     }
 
     //affiche un invité précis
