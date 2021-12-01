@@ -7,6 +7,7 @@ class Lieu extends CI_Controller {
         $this->load->helper('url_helper');
     }
 
+    //affiche un lieu précis
     public function afficher($lie_id){
         $data['lieu_infos'] = $this->db_model->get_lieu($lie_id);
         $this->load->view('templates/haut');

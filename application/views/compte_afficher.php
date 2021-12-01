@@ -26,10 +26,6 @@
                 Nouveau Mot de Passe <input type='password' name='new_mdp' /><br>
                 Confirmer Nouveau Mot de Passe <input type='password' name='new_mdp_2' /><br>
                 <input type='submit' value='Valider'/><br>";
-                //echo"<br><br><a href='".base_url()."index.php/compte/changer_mdp'>Modifier le mot de passe</a>";
-
-
-
 
 
         echo("  </div>

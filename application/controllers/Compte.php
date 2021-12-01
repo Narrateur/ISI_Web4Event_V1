@@ -9,6 +9,7 @@ class Compte extends CI_Controller {
         $this->load->library('form_validation');
     }
 
+    //affiche tout les comptes
     public function lister(){
         $data['titre'] = 'Liste des pseudos :';
         $data['pseudos'] = $this->db_model->get_all_compte();
@@ -17,6 +18,7 @@ class Compte extends CI_Controller {
         $this->load->view('templates/bas');
     }
 
+    //creer un compte
     public function creer(){
         $this->load->helper("form");
         $this->load->library("form_validation");
@@ -36,6 +38,7 @@ class Compte extends CI_Controller {
         }
     }
 
+    //permet de se connecter. Variables de SESSION : username -> cpt_pseudo || statut -> I (invité) ou O (organisateur)
     public function connecter()
     {
         $this->load->helper('form');
@@ -72,6 +75,7 @@ class Compte extends CI_Controller {
         }
     }
 
+    //permet de changer de mdp
     public function changer_mdp(){
         $this->form_validation->set_rules('ancien_mdp', 'ancien_mdp', 'required');
         $this->form_validation->set_rules('new_mdp', 'new_mdp', 'required');
@@ -84,28 +88,21 @@ class Compte extends CI_Controller {
 
         }else{
             $ancien_mdp = $this->input->post('ancien_mdp');
-            //echo(" acien ".$ancien_mdp."<br>");
             $new_mdp = $this->input->post('new_mdp');
-            //echo(" new ".$new_mdp."<br>");
             $new_mdp_2 = $this->input->post('new_mdp_2');
-            //echo(" new2 ".$new_mdp_2."<br>");
-            //echo($this->session->userdata('username'));
 
             if($this->db_model->connect_compte($this->session->userdata('username'),$ancien_mdp)){
                 if($new_mdp==$new_mdp_2){
                     $this->db_model->update_mdp($this->session->userdata('username'),$new_mdp);
-                    /*if(!$this->db_model->update_mdp($this->session->userdata('username'),$new_mdp)){
-                        redirect(base_url()."index.php/compte/compte_afficher");
-                    }*/
                     redirect(base_url()."index.php");
                 }
             }else{
                 redirect(base_url()."index.php");
-                //echo("non");
             }
         }
     }
 
+    //affiche les information du compte connecter (privé)
     public function afficher($cpt_pseudo){
         
         if($this->session->userdata('statut') == 'I'){
@@ -118,12 +115,9 @@ class Compte extends CI_Controller {
         $this->load->view('templates/bas');
     }
 
+    //detruit la session pour redirige vers l'accueil
     public function deconnecter(){
         session_destroy();
-        $data['actualite'] = $this->db_model->get_all_actualite();
-        
-        $this->load->view('templates/haut');
-        $this->load->view('actualite_tout_afficher',$data);
-        $this->load->view('templates/bas');
+        redirect(base_url()."index.php");
     }
 }

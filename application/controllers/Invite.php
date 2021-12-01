@@ -9,6 +9,7 @@ class Invite extends CI_Controller {
         $this->load->helper('url_helper');
     }
 
+    //affiche tout les invités, dans des cadres
     public function galerie(){
         $data['invite_info'] = $this->db_model->get_all_invite_infos();
         $this->load->view('templates/haut');
@@ -16,10 +17,12 @@ class Invite extends CI_Controller {
         $this->load->view('templates/bas');
     }
 
+    //affiche tout les invité d'une animation précise
     public function galerie_animation($ani_id){
 
     }
 
+    //affiche un invité précis
     public function afficher($pseudo){
         $data['invite'] = $this->db_model->get_invite($pseudo);
         $this->load->view('templates/haut');
