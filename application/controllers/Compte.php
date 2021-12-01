@@ -5,7 +5,10 @@ class Compte extends CI_Controller {
         parent::__construct();
         $this->load->model('db_model');
         $this->load->helper('url_helper');
+        $this->load->helper('form');
+        $this->load->library('form_validation');
     }
+
     public function lister(){
         $data['titre'] = 'Liste des pseudos :';
         $data['pseudos'] = $this->db_model->get_all_compte();
@@ -44,6 +47,7 @@ class Compte extends CI_Controller {
             $this->load->view('templates/haut');
             $this->load->view('compte_connecter');
             $this->load->view('templates/bas');
+
         }else{
             $username = $this->input->post('pseudo');
             $password = $this->input->post('mdp');
@@ -55,8 +59,8 @@ class Compte extends CI_Controller {
 
                 //recupération dans une variable de session du role de l'utilisateur (Orga ou Invité)
                 $statut = $this->db_model->get_compte($username);
-                $session_adminInvite = array('statut' => $statut->cpt_statut);
-                $this->session->set_userdata($session_adminInvite);
+                $session_data = array('statut' => $statut->cpt_statut);
+                $this->session->set_userdata($session_data);
 
                 //revoie sur les infos du compte
                 $this->afficher($this->session->userdata('username'));
@@ -69,37 +73,35 @@ class Compte extends CI_Controller {
     }
 
     public function changer_mdp(){
-        $this->load->helper('form');
-        $this->load->library('form_validation');
         $this->form_validation->set_rules('ancien_mdp', 'ancien_mdp', 'required');
         $this->form_validation->set_rules('new_mdp', 'new_mdp', 'required');
         $this->form_validation->set_rules('new_mdp_2', 'new_mdp_2', 'required');
 
-        if ($this->session->userdata('usersame') == null){
+        if ($this->session->userdata('username') == null){
             $this->load->view('templates/haut');
             $this->load->view('compte_connecter');
             $this->load->view('templates/bas');
+
         }else{
             $ancien_mdp = $this->input->post('ancien_mdp');
+            //echo(" acien ".$ancien_mdp."<br>");
             $new_mdp = $this->input->post('new_mdp');
+            //echo(" new ".$new_mdp."<br>");
             $new_mdp_2 = $this->input->post('new_mdp_2');
-            if($this->db_model->connect_compte($this->session->userdata('usersame'),$ancien_mdp)){
-                if($new_mdp!=$new_mdp_2){
-                    $this->load->view('templates/haut');
-                    $this->load->view('compte_afficher');
-                    $this->load->view('templates/bas');
-                }else{
-                    if(!$this->db_model->update_mdp($this->session->userdata('usersame'),$new_mdp)){
-                        $this->load->view('templates/haut');
-                        $this->load->view('compte_afficher');
-                        $this->load->view('templates/bas');
-                    }
-                }
+            //echo(" new2 ".$new_mdp_2."<br>");
+            //echo($this->session->userdata('username'));
 
+            if($this->db_model->connect_compte($this->session->userdata('username'),$ancien_mdp)){
+                if($new_mdp==$new_mdp_2){
+                    $this->db_model->update_mdp($this->session->userdata('username'),$new_mdp);
+                    /*if(!$this->db_model->update_mdp($this->session->userdata('username'),$new_mdp)){
+                        redirect(base_url()."index.php/compte/compte_afficher");
+                    }*/
+                    redirect(base_url()."index.php");
+                }
             }else{
-                $this->load->view('templates/haut');
-                $this->load->view('compte_connecter');
-                $this->load->view('templates/bas');
+                redirect(base_url()."index.php");
+                //echo("non");
             }
         }
     }

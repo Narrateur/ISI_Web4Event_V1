@@ -62,6 +62,9 @@ class Db_model extends CI_Model{
     }
 
     public function update_mdp($cpt_pseudo, $cpt_mdp){
+        $salt = "LE SEL DU NARRATEUR";
+        $cpt_mdp = hash('sha512', $cpt_mdp.$salt); // hashage + salage du mdp
+
         $query = $this->db->query("UPDATE t_compte_cpt SET cpt_mdp = '".$cpt_mdp."' where cpt_pseudo = '".$cpt_pseudo."';");
         if(!$query){
             return false;
@@ -139,7 +142,7 @@ class Db_model extends CI_Model{
     //-----------------------------------------ORGANISTEUR------------------------------------------
     //----------------------------------------------------------------------------------------------
     public function get_organisateur($cpt_pseudo){
-        $query = $this->db->query("SELECT org_nom, org_prenom, org_mail FROM t_organistauer_org WHERE cpt_pseudo = '".$cpt_pseudo."';");
+        $query = $this->db->query("SELECT org_nom, org_prenom, org_mail, cpt_pseudo FROM t_organistauer_org WHERE cpt_pseudo = '".$cpt_pseudo."';");
         return $query->row();
     }
 

@@ -44,7 +44,7 @@
 				<div class="col-lg-10 col-md-8 text-center text-lg-right text-md-right">
 					<div class="header-top-info">
 						<a href="tel:+23-345-67890">Call Us : <span>+23-345-67890</span></a>
-						<a href="mailto:support@gmail.com" ><i class="fa fa-envelope mr-2"></i><span>support@gmail.com</span></a>
+						<a href="mailto:baguetteNwargame.support@gmail.com" ><i class="fa fa-envelope mr-2"></i><span>baguetteNwargame.support@gmail.com</span></a>
 					</div>
 				</div>
 			</div>
@@ -79,7 +79,7 @@
 			   	
 			   <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/objet_trouve/tout_afficher">Objets Trouvés</a></li>
 
-			   <?php if($this->session->userdata('statut') != null) echo"<li class='nav-item'><a class='nav-link' href='".base_url()."index.php/compte/afficher/".$this->session->userdata('username')."'>Mon Compte</a></li>"; ?>
+			   <?php if($this->session->userdata('statut') != null) echo"<li class='nav-item'><a class='nav-link' href='".base_url()."index.php/compte/afficher/".$this->session->userdata('username')."'>Mon Compte<br>".$this->session->userdata('username')."</a></li>"; ?>
 			</ul> 
 
 

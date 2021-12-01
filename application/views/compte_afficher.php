@@ -10,15 +10,23 @@
 
                 if($this->session->userdata('statut') == 'I'){
                     echo("<img src='".base_url()."style/images/invite/".$infos->inv_image."' alt='' class='img-fluid rounded'>
-                            <h5 class='mb-0 mt-4'>".$infos->inv_nom."</h5>
+                            <h5 class='mb-0 mt-4'>".$infos->cpt_pseudo."<br>".$infos->inv_nom."</h5>
                             <p>".$infos->inv_description."</p>");
                 }else if($this->session->userdata('statut') == 'O'){
-                    echo("<h5 class='mb-0 mt-4'>".$infos->org_prenom." ".$infos->org_nom."</h5>
+                    echo("<h5 class='mb-0 mt-4'>".$infos->cpt_pseudo."<br>".$infos->org_prenom." ".$infos->org_nom."</h5>
                             <p>".$infos->org_mail."</p>");
                 }
                 
-                
-                echo"<br><br><a href='".base_url()."index.php/compte/changer_mdp'>Modifier le mot de passe</a>";
+                echo validation_errors(); 
+
+                echo form_open('compte/changer_mdp');
+                echo"
+                <label>Modifier le Mot de Passe</label><br><br>
+                Ancien Mot de Passe <input type='password' name='ancien_mdp' /><br>
+                Nouveau Mot de Passe <input type='password' name='new_mdp' /><br>
+                Confirmer Nouveau Mot de Passe <input type='password' name='new_mdp_2' /><br>
+                <input type='submit' value='Valider'/><br>";
+                //echo"<br><br><a href='".base_url()."index.php/compte/changer_mdp'>Modifier le mot de passe</a>";
 
 
 
