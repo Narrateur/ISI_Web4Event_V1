@@ -118,6 +118,10 @@ class Db_model extends CI_Model{
         return $query->result_array();
     }
 
+    //suppression d'une animation 
+    public function delete_animation($ani_id){
+        //$query = $this->db->query("CALL delete_animation(".$ani_id.")");
+    }
     //----------------------------------------------------------------------------------------------
     //--------------------------------------------INVITE--------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -149,7 +153,7 @@ class Db_model extends CI_Model{
     //----------------------------------------------------------------------------------------------
     public function get_organisateur($cpt_pseudo){
         $query = $this->db->query("SELECT org_nom, org_prenom, org_mail, cpt_pseudo FROM t_organisateur_org WHERE cpt_pseudo = '".$cpt_pseudo."';");
-        return $query->row();
+        return $query->result_array();
     }
 
 
