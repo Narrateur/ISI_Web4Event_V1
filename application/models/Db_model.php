@@ -120,7 +120,7 @@ class Db_model extends CI_Model{
 
     //suppression d'une animation 
     public function delete_animation($ani_id){
-        //$query = $this->db->query("CALL delete_animation(".$ani_id.")");
+        $query = $this->db->query("CALL delete_animation(".$ani_id.")");
     }
     //----------------------------------------------------------------------------------------------
     //--------------------------------------------INVITE--------------------------------------------

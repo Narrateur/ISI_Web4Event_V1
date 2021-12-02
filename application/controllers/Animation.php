@@ -7,6 +7,8 @@ class Animation extends CI_Controller {
         parent::__construct();
         $this->load->model('db_model');
         $this->load->helper('url_helper');
+        $this->load->helper('form');
+        $this->load->library('form_validation');
     }
 
     public function tout_afficher(){
@@ -30,6 +32,20 @@ class Animation extends CI_Controller {
         $this->load->view('templates/haut');
         $this->load->view('animation_tout_afficher_admin',$data);
         $this->load->view('templates/bas');
+    }
+
+    public function supprimer_animation(){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $ani_id = $this->input->post('ani_id');
+        echo($ani_id);
+        $this->db_model->delete_animation($ani_id);
+        //header("Refresh:0");
+        redirect(base_url()."index.php/animation/tout_afficher_admin");
+    }
+
+    public function modifier_animation(){
 
     }
+
 }
