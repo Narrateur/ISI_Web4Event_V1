@@ -12,6 +12,12 @@
     }
 
     if($infos != NULL){
+        //variable pour les ajout de post, réseaux et passeport
+        $post_added = 0;
+        $url_added=0;
+        $passeport_added = 0;
+        //--------------------------------------------------------
+
         echo("<div class='sidebar-widget card border-0 mb-3'>
                 <img src='images/blog/blog-author.jpg' alt='' class='img-fluid'>
                 <div class='card-body p-4 text-center'>");
@@ -29,11 +35,10 @@
             }
 
             if($this->session->userdata('statut') == 'I'){
-                $cptPseudo = $i['cpt_pseudo']; // sauvegarde du pseudo pour afficher les url et les post
+                $cptPseudo = $this->session->userdata('username'); // sauvegarde du pseudo pour afficher les url et les post
                 
                 //--------------------------------------------------------------URL-------------------------------------------------------
-                $cptPseudo = $i['cpt_pseudo']; // sauvegarde du pseudo pour afficher les url et les post
-                $url_added=0;
+                
                 foreach($infos as $url){
                     if(strcmp($cptPseudo,$url["cpt_pseudo"])==0 && !isset($urlTraite[$url["url_lien"]]) && $url["url_lien"]!=NULL ){
                         if(str_contains($url['url_lien'],'facebook')) echo"<li class='list-inline-item mr-3'><a href='".$url["url_lien"]."'><i class='fab fa-facebook-f text-muted'></i></a></li>";
@@ -47,11 +52,11 @@
                     $urlTraite[$url["url_lien"]]=1;
                 }
                 
-                echo"<br><br>"; 
+                //echo"<br><br>"; 
                 //------------------------------------------------------------------------------------------------------------------------
                 
                 //--------------------------------------------------------------PASSEPORT-------------------------------------------------------
-                $passeport_added = 0;
+                
                 foreach($infos as $passeport){
                     if(strcmp($cptPseudo,$passeport["cpt_pseudo"])==0 && !isset($passeportTraite[$passeport["pas_login"]])){
                         if($passeport_added==0) echo("<h5 class='mb-0 mt-4'>PASSEPORT</h5>"); $passeport_added=1;
@@ -59,22 +64,22 @@
                     }
                     $passeportTraite[$passeport["pas_login"]]=1;
                 }
-                echo("<br><br>");
+                //echo("<br>");
                 //------------------------------------------------------------------------------------------------------------------------------
 
                 
                 //--------------------------------------------------------------POST-------------------------------------------------------
-                $post_added = 0;
+                
                 foreach($infos as $post){
-                    if($post["pst_text"] != NULL && $post_added==0) echo("<table class='table table-striped'>"); 
+                    if($post["pst_text"] != NULL && $post_added==0) echo("<br><table class='table table-striped'>"); $post_added=1;
 
-                    if(strcmp($cptPseudo,$post["cpt_pseudo"])==0 && !isset($postTraite[$post["pst_text"]]) && $post["pst_etat"]=="A"){
+                    if(strcmp($cptPseudo,$post["cpt_pseudo"])==0 && !isset($postTraite[$post["pst_text"]]) && $post["pst_text"] != NULL){
                         echo"
                         <thead class='thead-dark'>
-                            <tr><th scope='col'>Post le ".$post["pst_date"]."</th></tr>
+                            <tr><th scope='col'>Post le ".$post["pst_date"]."</th> <th scope='col'>ETAT</th></tr>
                         </thead>
                         <tbody>
-                            <tr><th scope='col'>".$post["pst_text"]."</th></tr>
+                            <tr><th scope='col'>".$post["pst_text"]."</th> <th scope='col'>".$post["pst_etat"]."</th></tr>
                         </tbody>";
                         $postTraite[$post["pst_text"]]=1;
                         $post_added=1;
@@ -96,7 +101,7 @@
 
         echo validation_errors(); 
         echo form_open('compte/changer_mdp');
-        echo"
+        echo"<br><br>
         <label>Modifier le Mot de Passe</label><br><br>
         Ancien Mot de Passe <input type='password' name='ancien_mdp' /><br>
         Nouveau Mot de Passe <input type='password' name='new_mdp' /><br>

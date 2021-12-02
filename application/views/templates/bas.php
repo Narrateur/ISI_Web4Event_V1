@@ -28,13 +28,8 @@
 			</div>
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="widget">
-					<h4 class="text-capitalize mb-4">Subscribe Us</h4>
-					<p>Subscribe to get latest news article and resources  </p>
-
-					<form action="#" class="sub-form">
-						<input type="text" class="form-control mb-3" placeholder="Subscribe Now ...">
-						<a href="#" class="btn btn-main btn-small">subscribe</a>
-					</form>
+					<h4 class="text-capitalize mb-4">Ajouter un Post</h4>
+					<a href="<?php echo base_url(); ?>index.php/post/ajouter" class="btn btn-main btn-small"><h3 color-white>+</h3></a>
 				</div>
 			</div>
 
