@@ -6,6 +6,7 @@ class Db_model extends CI_Model{
 
     public function __construct(){
         $this->load->database();
+        $this->salt = "LE SEL DU NARRATEUR";
     }
 
     //----------------------------------------------------------------------------------------------
@@ -33,8 +34,8 @@ class Db_model extends CI_Model{
         $id=$this->input->post('id');
         $mdp=$this->input->post('mdp');
 
-        $salt = "LE SEL DU NARRATEUR";
-        $mdp = hash('sha512', $mdp.$salt); // hashage + salage du mdp
+        //$salt = "LE SEL DU NARRATEUR";
+        $mdp = hash('sha512', $mdp.$this->salt); // hashage + salage du mdp
 
         $req="INSERT INTO t_compte_cpt VALUES ('".$id."','".$mdp."', 'D', 'I');";
         $query = $this->db->query($req);
@@ -44,8 +45,8 @@ class Db_model extends CI_Model{
 
     //Verification pour connexion. Renvoie true si les informations rentré permettent de se connecter, false sinon
     public function connect_compte($username, $password){
-        $salt = "LE SEL DU NARRATEUR";
-        $password = hash('sha512', $password.$salt); // hashage + salage du mdp
+        //$salt = "LE SEL DU NARRATEUR";
+        $password = hash('sha512', $password.$this->salt); // hashage + salage du mdp
 
         $query = $this->db->query("SELECT cpt_pseudo, cpt_mdp FROM t_compte_cpt WHERE cpt_pseudo = '".$username."' AND cpt_mdp = '".$password."' AND cpt_etat = 'A' ");
         if($query->num_rows()>0){
@@ -62,8 +63,8 @@ class Db_model extends CI_Model{
     }
 
     public function update_mdp($cpt_pseudo, $cpt_mdp){
-        $salt = "LE SEL DU NARRATEUR";
-        $cpt_mdp = hash('sha512', $cpt_mdp.$salt); // hashage + salage du mdp
+        //$salt = "LE SEL DU NARRATEUR";
+        $cpt_mdp = hash('sha512', $cpt_mdp.$this->salt); // hashage + salage du mdp
 
         $query = $this->db->query("UPDATE t_compte_cpt SET cpt_mdp = '".$cpt_mdp."' where cpt_pseudo = '".$cpt_pseudo."';");
         if(!$query){
@@ -168,6 +169,36 @@ class Db_model extends CI_Model{
     public function get_lieu($lie_id){
         $query = $this->db->query("SELECT lie_id, lie_libelle, lie_adresse, srv_id, srv_nom FROM t_lieu_lie LEFT OUTER JOIN t_service_srv USING(lie_id) WHERE lie_id = ".$lie_id.";");
         return $query->result_array();
+    }
+
+    //----------------------------------------------------------------------------------------------
+    //------------------------------------------PASSEPORT-------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    public function connect_passeport($pas_login,$pas_mdp){
+        //$salt = "LE SEL DU NARRATEUR";
+        $pas_mdp = hash('sha512', $pas_mdp.$this->salt); // hashage + salage du mdp
+
+        $query = $this->db->query("SELECT pas_id, cpt_pseudo FROM t_passeport_pas WHERE pas_login = '".$pas_login."' AND pas_mdp = '".$pas_mdp."' AND pas_etat = 'A' ");
+        if($query->num_rows()>0){
+            return $query->row();
+        }else{
+            return false;
+        }
+    }
+
+
+    //----------------------------------------------------------------------------------------------
+    //---------------------------------------------POST---------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    public function insert_post($pst_text,$pas_id){
+        $query = $this->db->query("INSERT INTO t_post_pst VALUES(NULL,'".$pst_text."',NOW(),'".$pas_id."','A')");
+        if(!$query){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }

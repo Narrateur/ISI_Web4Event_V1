@@ -28,6 +28,17 @@ class Post extends CI_Controller {
         $pas_mdp = $this->input->post('pas_mdp');
         $pst_text = $this->input->post('pst_text');
 
+        $pas_id = $this->db_model->connect_passeport($pas_login,$pas_mdp);
+
+        if($pas_id != false){
+            if($this->db_model->insert_post(addslashes($pst_text),$pas_id->pas_id)){
+                
+                redirect(base_url()."index.php/invite/afficher/".$pas_id->cpt_pseudo);
+            }else{
+                redirect(base_url()."index.php");
+            }
+        }
+
     }
 
 }
