@@ -8,7 +8,7 @@
   
   <meta name="author" content="themefisher.com">
 
-  <title>Megakit| Html5 Agency template</title>
+  <title>Baguette N' Wargame</title>
 
   <!-- bootstrap.min css -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>style/plugins/bootstrap/css/bootstrap.min.css">
@@ -36,8 +36,8 @@
 			<div class="row justify-content-between align-items-center">
 				<div class="col-lg-2 col-md-4">
 					<div class="header-top-socials text-center text-lg-left text-md-left">
-						<a href="https://www.facebook.com/themefisher" target="_blank"><i class="ti-facebook"></i></a>
-						<a href="https://twitter.com/themefisher" target="_blank"><i class="ti-twitter"></i></a>
+						<a href="#" target="_blank"><i class="ti-facebook"></i></a>
+						<a href="#" target="_blank"><i class="ti-twitter"></i></a>
 						<a href="https://github.com/Narrateur/" target="_blank"><i class="ti-github"></i></a>
 					</div>
 				</div>

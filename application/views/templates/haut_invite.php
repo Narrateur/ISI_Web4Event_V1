@@ -43,9 +43,9 @@
 		  <div class="collapse navbar-collapse text-center" id="navbarsExample09">
 			<ul class="navbar-nav ml-auto">
         
-				<li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/animation/tout_afficher">Passeport</a></li>
+				<li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/">Passeport</a></li>
 
-				<li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/invite/galerie">Post</a></li>
+				<li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/">Post</a></li>
 
         <?php if($this->session->userdata('statut') != null) echo"<li class='nav-item'><a class='nav-link' href='".base_url()."index.php/compte/afficher/".$this->session->userdata('username')."'>Mon Compte<br>".$this->session->userdata('username')."</a></li>"; ?>
 

@@ -36,10 +36,10 @@
 			<div class="col-lg-3 ml-auto col-sm-6">
 				<div class="widget">
 					<div class="logo mb-4">
-						<h3>Mega<span>kit.</span></h3>
+						<h3>Baguette N' <span>Wargame</span></h3>
 					</div>
-					<h6><a href="tel:+23-345-67890" >Support@megakit.com</a></h6>
-					<a href="mailto:support@gmail.com"><span class="text-color h4">+23-456-6588</span></a>
+					<h6><a href="tel:#" >+23-456-6588</a></h6>
+					<a href="mailto:baguetteNwargame.support@gmail.com" ><i class="fa fa-envelope mr-2"></i><span>baguetteNwargame.support@gmail.com</span></a>
 				</div>
 			</div>
 		</div>
@@ -48,14 +48,14 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="copyright">
-						&copy; Copyright Reserved to <span class="text-color">Megakit.</span> by <a href="https://themefisher.com/" target="_blank">Themefisher</a>
+						&copy; Copyright Reserved to <span class="text-color">Baguette N' Wargame</span> by <a href="https://themefisher.com/" target="_blank">Themefisher</a>
 					</div>
 				</div>
 				<div class="col-lg-6 text-left text-lg-right">
 					<ul class="list-inline footer-socials">
-						<li class="list-inline-item"><a href="https://www.facebook.com/themefisher"><i class="ti-facebook mr-2"></i>Facebook</a></li>
-						<li class="list-inline-item"><a href="https://twitter.com/themefisher"><i class="ti-twitter mr-2"></i>Twitter</a></li>
-						<li class="list-inline-item"><a href="https://www.pinterest.com/themefisher/"><i class="ti-linkedin mr-2 "></i>Linkedin</a></li>
+						<li class="list-inline-item"><a href="#"><i class="ti-facebook mr-2"></i>Facebook</a></li>
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter mr-2"></i>Twitter</a></li>
+						<li class="list-inline-item"><a href="#"><i class="ti-linkedin mr-2 "></i>Linkedin</a></li>
 					</ul>
 				</div>
 			</div>
