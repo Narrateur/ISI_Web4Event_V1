@@ -40,7 +40,7 @@
                             $url_added=0;
 
                             foreach($invite_info as $url){
-                                if(strcmp($cptPseudo,$url["cpt_pseudo"])==0 && !isset($urlTraite[$url["url_lien"]])){
+                                if(strcmp($cptPseudo,$url["cpt_pseudo"])==0 && !isset($urlTraite[$url["url_lien"]]) && $url["url_lien"]!=NULL){
                                     if(str_contains($url['url_lien'],'facebook')) echo"<li class='list-inline-item mr-3'><a href='".$url["url_lien"]."'><i class='fab fa-facebook-f text-muted'></i></a></li>";
                                     if(str_contains($url['url_lien'],'twitter')) echo"<li class='list-inline-item mr-3'><a href='".$url["url_lien"]."'><i class='fab fa-twitter text-muted'></i></a></li>";
                                     if(str_contains($url['url_lien'],'youtube')) echo"<li class='list-inline-item mr-3'><a href='".$url["url_lien"]."'><i class='fab fa-youtube text-muted'></i></a></li>";

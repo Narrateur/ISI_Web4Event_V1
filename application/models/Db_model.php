@@ -152,7 +152,8 @@ class Db_model extends CI_Model{
     }
 
     //UPDATE les infos d'un invite
-    public function update_invite(){
+    public function update_invite($inv_nom,$inv_description,$cpt_pseudo){
+        $query = $this->db->query("UPDATE t_invite_inv SET inv_nom='".$inv_nom."', inv_description='".$inv_description."' WHERE cpt_pseudo='".$cpt_pseudo."' ");
 
     }
 
@@ -165,6 +166,9 @@ class Db_model extends CI_Model{
         return $query->result_array();
     }
 
+    public function update_organisateur($org_prenom,$org_nom,$org_mail,$cpt_pseudo){
+        $query = $this->db->query("UPDATE t_organisateur_org SET org_prenom='".$org_prenom."', org_nom='".$org_nom."', org_mail='".$org_mail."' WHERE cpt_pseudo='".$cpt_pseudo."' ");
+    }
 
     //----------------------------------------------------------------------------------------------
     //---------------------------------------------LIEU---------------------------------------------

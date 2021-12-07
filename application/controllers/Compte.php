@@ -123,4 +123,41 @@ class Compte extends CI_Controller {
         header("Refresh:0");
         redirect(base_url()."index.php");
     }
+
+    public function update_invite(){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        
+        $this->form_validation->set_rules('inv_nom', 'inv_nom', 'required');
+        $this->form_validation->set_rules('inv_description', 'inv_description', 'required');
+
+        $inv_nom = $this->input->post('inv_nom');
+        $inv_description = $this->input->post('inv_description');
+
+        $this->db_model->update_invite($inv_nom,$inv_description,$this->session->userdata('username'));
+        redirect(base_url()."index.php/compte/afficher/".$this->session->userdata('username'));
+    }
+
+    public function update_admin(){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        
+        $this->form_validation->set_rules('org_prenom', 'org_prenom', 'required');
+        $this->form_validation->set_rules('org_nom', 'org_nom', 'required');
+        $this->form_validation->set_rules('org_mail', 'org_mail', 'required');
+
+        $org_prenom = $this->input->post('org_prenom');
+        $org_nom = $this->input->post('org_nom');
+        $org_mail = $this->input->post('org_mail');
+
+        $this->db_model->update_organisateur($org_prenom,$org_nom,$org_mail,$this->session->userdata('username'));
+        redirect(base_url()."index.php/compte/afficher/".$this->session->userdata('username'));
+    }
+
+    public function annuler_modification(){
+        header("Refresh:0");
+        redirect(base_url()."index.php/compte/afficher/".$this->session->userdata('username'));
+    }
 }

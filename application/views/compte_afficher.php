@@ -22,15 +22,40 @@
                 <img src='images/blog/blog-author.jpg' alt='' class='img-fluid'>
                 <div class='card-body p-4 text-center'>");
         foreach($infos as $i){
+            if(strcmp($this->session->userdata('username'),$i["cpt_pseudo"])!=0) redirect(base_url()."index.php");
             
             if(!isset($alreadyPrint[$i["cpt_pseudo"]])){
                 if($this->session->userdata('statut') == 'I'){
-                    echo("<img src='".base_url()."style/images/invite/".$i["inv_image"]."' alt='' class='img-fluid rounded'>
-                            <h5 class='mb-0 mt-4'>".$i["cpt_pseudo"]."<br>".$i["inv_nom"]."</h5>
-                            <p>".$i["inv_description"]."</p>");
+                    echo validation_errors();
+                    echo form_open('compte/update_invite');
+                    echo("
+                            <img src='".base_url()."style/images/invite/".$i["inv_image"]."' alt='' class='img-fluid rounded'>
+                            <h5 class='mb-0 mt-4'>".$i["cpt_pseudo"]."<br>
+                            <input type='text' name='inv_nom' value='".$i["inv_nom"]."'/></h5>
+                            <p><textarea type='text' name='inv_description' rows='5' cols='50'>".$i["inv_description"]."</textarea></p><br>
+                            <input type='submit' value='Modifier'/>
+                            </form>
+                        ");
+                    echo validation_errors();
+                    echo form_open('compte/annuler_modification');
+                    echo("<input type='submit' value='Annuler'/></form><br>");
+
                 }else if($this->session->userdata('statut') == 'O'){
-                    echo("<h5 class='mb-0 mt-4'>".$i["cpt_pseudo"]."<br>".$i["org_prenom"]." ".$i["org_nom"]."</h5>
-                            <p>".$i["org_mail"]."</p>");
+                    echo validation_errors();
+                    echo form_open('compte/update_admin');
+                    echo("
+                            <h5 class='mb-0 mt-4'>
+                                ".$i["cpt_pseudo"]."<br>
+                                <input type='text' name='org_prenom' value='".$i["org_prenom"]."'/> 
+                                <input type='text' name='org_nom' value='".$i["org_nom"]."'/>
+                            </h5>
+                            <p><input type='email' name='org_mail' value='".$i["org_mail"]."'/></p>
+                            <input type='submit' value='Modifier'/>
+                            </form>
+                        ");
+                        echo validation_errors();
+                        echo form_open('compte/annuler_modification');
+                        echo("<input type='submit' value='Annuler'/></form><br>");
                 }
             }
 
