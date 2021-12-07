@@ -153,6 +153,7 @@ class Db_model extends CI_Model{
 
     //UPDATE les infos d'un invite
     public function update_invite($inv_nom,$inv_description,$cpt_pseudo){
+        $inv_description=addslashes($inv_description);
         $query = $this->db->query("UPDATE t_invite_inv SET inv_nom='".$inv_nom."', inv_description='".$inv_description."' WHERE cpt_pseudo='".$cpt_pseudo."' ");
 
     }
