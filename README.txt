@@ -23,3 +23,11 @@ talesOfTheRift / talesOfTheRift
 wargameSpirit / wargameSpirit
 
 
+
+#-------------------PASSEPORT-------------------
+#Login/mdp
+Staff_FWS / Staff_FWS
+WargameSpirit_Gerant / WargameSpirit_Gerant
+Regi_FWS / Regi_FWS
+Pride / Pride
+invTEST / invTEST
