@@ -186,7 +186,7 @@ class Db_model extends CI_Model{
     //----------------------------------------------------------------------------------------------
     //Test la connection d'un passeport. Renvoie l'id du passeport et le pseudo du compte si la connection réussi, faux sinon
     public function connect_passeport($pas_login,$pas_mdp){
-        
+        $pas_login = addslashes($pas_login);
         $pas_mdp = hash('sha512', $pas_mdp.$this->salt); // hashage + salage du mdp
 
         $query = $this->db->query("SELECT pas_id, cpt_pseudo FROM t_passeport_pas WHERE pas_login = '".$pas_login."' AND pas_mdp = '".$pas_mdp."' AND pas_etat = 'A' ");
