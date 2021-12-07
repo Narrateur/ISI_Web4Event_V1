@@ -60,7 +60,7 @@
                 foreach($infos as $passeport){
                     if(strcmp($cptPseudo,$passeport["cpt_pseudo"])==0 && !isset($passeportTraite[$passeport["pas_login"]])){
                         if($passeport_added==0) echo("<h5 class='mb-0 mt-4'>PASSEPORT</h5>"); $passeport_added=1;
-                        echo($passeport["pas_login"]."<br>");
+                        echo($passeport["pas_login"]." -- ".$passeport["pas_etat"]."<br>");
                     }
                     $passeportTraite[$passeport["pas_login"]]=1;
                 }
@@ -104,8 +104,8 @@
         echo"<br><br>
         <label>Modifier le Mot de Passe</label><br><br>
         Ancien Mot de Passe <input type='password' name='ancien_mdp' /><br>
-        Nouveau Mot de Passe <input type='password' name='new_mdp' /><br>
-        Confirmer Nouveau Mot de Passe <input type='password' name='new_mdp_2' /><br>
+        Nouveau Mot de Passe <input type='password' name='new_mdp'  minlength='5' /><br>
+        Confirmer Nouveau Mot de Passe <input type='password' name='new_mdp_2'  minlength='5'  /><br>
         <input type='submit' value='Valider'/><br>";
 
 

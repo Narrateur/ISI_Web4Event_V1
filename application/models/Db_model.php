@@ -62,6 +62,7 @@ class Db_model extends CI_Model{
         return $query->row();
     }
 
+    //met a jour le mot de passe d'un compte
     public function update_mdp($cpt_pseudo, $cpt_mdp){
         //$salt = "LE SEL DU NARRATEUR";
         $cpt_mdp = hash('sha512', $cpt_mdp.$this->salt); // hashage + salage du mdp
@@ -94,14 +95,14 @@ class Db_model extends CI_Model{
     //----------------------------------------------------------------------------------------------
     //-------------------------------------------ANIMATION------------------------------------------
     //----------------------------------------------------------------------------------------------
-    //renvoie toutes les animations
+    //renvoie toutes les animations -- APPEL DE FONCTION
     public function get_all_animation(){
         //$query = $this->db->query("SELECT ani_id, ani_libelle, ani_description, DATE(ani_horaireDebut) as ani_horaireDebut, DATE(ani_horaireFin) as ani_horaireFin, lie_libelle, invite_animation(ani_id) AS invite FROM t_animation_ani JOIN t_lieu_lie USING(lie_id) ORDER BY ani_horaireDebut;");
         $query = $this->db->query("SELECT ani_id, ani_libelle, ani_description, ani_horaireDebut, ani_horaireFin, lie_id, lie_libelle, invite_animation(ani_id) AS invite, animation_etat(ani_id) as etat FROM t_animation_ani JOIN t_lieu_lie USING(lie_id) ORDER BY ani_horaireDebut;");
         return $query->result_array();
     }
 
-    //renvoie les infos d'une animation donné
+    //renvoie les infos d'une animation donné -- APPEL DE FONCTION
     public function get_animation($id_animation){
         $query = $this->db->query("SELECT ani_id, ani_libelle, ani_description, ani_horaireDebut, ani_horaireFin, lie_id, lie_libelle, invite_animation(ani_id) AS invite, animation_etat(ani_id) as etat FROM t_animation_ani JOIN t_lieu_lie USING(lie_id) WHERE ani_id = ".$id_animation.";");
         return $query->row();
@@ -119,10 +120,16 @@ class Db_model extends CI_Model{
         return $query->result_array();
     }
 
-    //suppression d'une animation 
+    //suppression d'une animation -- APPEL DE PROCEDURE
     public function delete_animation($ani_id){
         $query = $this->db->query("CALL delete_animation(".$ani_id.")");
     }
+
+    //UPDATE une animation
+    public function update_animation(){
+
+    }
+
     //----------------------------------------------------------------------------------------------
     //--------------------------------------------INVITE--------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -132,6 +139,7 @@ class Db_model extends CI_Model{
         return $query->result_array();
     }
 
+    //renvoie touts les infos d'une animation en particulier 
     public function get_all_invite_infos_animation($ani_id){
         $query = $this->db->query("SELECT inv_nom, inv_description, inv_image, cpt_pseudo, url_lien, pst_text, pst_date, pst_etat FROM t_url_url JOIN tj_posseder_psd USING(url_id) RIGHT OUTER JOIN t_invite_inv USING(cpt_pseudo) LEFT OUTER JOIN t_passeport_pas USING(cpt_pseudo) LEFT OUTER JOIN t_post_pst USING(pas_id) WHERE cpt_pseudo in(SELECT cpt_pseudo FROM tj_intervenir_itv WHERE ani_id = ".$ani_id.") ORDER BY pst_date DESC;");
         return $query->result_array();
@@ -143,15 +151,15 @@ class Db_model extends CI_Model{
         return $query->result_array();
     }
 
-    /*
-    public function get_invite_alone($cpt_pseudo){
-        $query = $this->db->query("SELECT inv_nom, inv_description, inv_image, cpt_pseudo, url_lien, pas_id, pas_login, pas_etat, pst_text, pst_date, pst_etat FROM t_url_url JOIN tj_posseder_psd USING(url_id) RIGHT OUTER JOIN t_invite_inv USING(cpt_pseudo) LEFT OUTER JOIN t_passeport_pas USING(cpt_pseudo) LEFT OUTER JOIN t_post_pst USING(pas_id) WHERE cpt_pseudo = '".$cpt_pseudo."' ;");
-        return $query->row();
-    }*/
+    //UPDATE les infos d'un invite
+    public function update_invite(){
+
+    }
 
     //----------------------------------------------------------------------------------------------
     //-----------------------------------------ORGANISTEUR------------------------------------------
     //----------------------------------------------------------------------------------------------
+    //renvoie les informations d'un organisateur en particuliers
     public function get_organisateur($cpt_pseudo){
         $query = $this->db->query("SELECT org_nom, org_prenom, org_mail, cpt_pseudo FROM t_organisateur_org WHERE cpt_pseudo = '".$cpt_pseudo."';");
         return $query->result_array();
@@ -161,11 +169,13 @@ class Db_model extends CI_Model{
     //----------------------------------------------------------------------------------------------
     //---------------------------------------------LIEU---------------------------------------------
     //----------------------------------------------------------------------------------------------
+    //renvoie tout les lieu
     public function get_all_lieu(){
         $query = $this->db->query("SELECT lie_id, lie_libelle, lie_adresse, srv_id, srv_nom FROM t_lieu_lie LEFT OUTER JOIN t_service_srv USING(lie_id) ORDER BY lie_libelle;");
         return $query->result_array();
     }
 
+    //renvoie les infos d'un lieu en particuliers
     public function get_lieu($lie_id){
         $query = $this->db->query("SELECT lie_id, lie_libelle, lie_adresse, srv_id, srv_nom FROM t_lieu_lie LEFT OUTER JOIN t_service_srv USING(lie_id) WHERE lie_id = ".$lie_id.";");
         return $query->result_array();
@@ -174,9 +184,9 @@ class Db_model extends CI_Model{
     //----------------------------------------------------------------------------------------------
     //------------------------------------------PASSEPORT-------------------------------------------
     //----------------------------------------------------------------------------------------------
-
+    //Test la connection d'un passeport. Renvoie l'id du passeport et le pseudo du compte si la connection réussi, faux sinon
     public function connect_passeport($pas_login,$pas_mdp){
-        //$salt = "LE SEL DU NARRATEUR";
+        
         $pas_mdp = hash('sha512', $pas_mdp.$this->salt); // hashage + salage du mdp
 
         $query = $this->db->query("SELECT pas_id, cpt_pseudo FROM t_passeport_pas WHERE pas_login = '".$pas_login."' AND pas_mdp = '".$pas_mdp."' AND pas_etat = 'A' ");
@@ -191,8 +201,10 @@ class Db_model extends CI_Model{
     //----------------------------------------------------------------------------------------------
     //---------------------------------------------POST---------------------------------------------
     //----------------------------------------------------------------------------------------------
-
+    //Insert un post dans la base de données
     public function insert_post($pst_text,$pas_id){
+        $pst_text = addslashes($pst_text);
+        
         $query = $this->db->query("INSERT INTO t_post_pst VALUES(NULL,'".$pst_text."',NOW(),'".$pas_id."','A')");
         if(!$query){
             return false;

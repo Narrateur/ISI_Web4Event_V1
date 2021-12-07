@@ -92,8 +92,10 @@ class Compte extends CI_Controller {
             $new_mdp_2 = $this->input->post('new_mdp_2');
 
             if($this->db_model->connect_compte($this->session->userdata('username'),$ancien_mdp)){
-                if($new_mdp==$new_mdp_2){
+                if(strcmp($new_mdp,$new_mdp_2)==0 && strlen($new_mdp)>=5){
                     $this->db_model->update_mdp($this->session->userdata('username'),$new_mdp);
+                    redirect(base_url()."index.php/compte/afficher/".$this->session->userdata('username'));
+                }else{
                     redirect(base_url()."index.php");
                 }
             }else{

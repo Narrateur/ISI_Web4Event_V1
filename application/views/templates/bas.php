@@ -39,7 +39,7 @@
 						<h3>Baguette N' <span>Wargame</span></h3>
 					</div>
 					<h6><a href="tel:#" >+23-456-6588</a></h6>
-					<a href="mailto:baguetteNwargame.support@gmail.com" ><i class="fa fa-envelope mr-2"></i><span>baguetteNwargame.support@gmail.com</span></a>
+					<a href="mailto:baguetteNwargame.support@orange.fr" ><i class="fa fa-envelope mr-2"></i><span>baguetteNwargame.support@orange.fr</span></a>
 				</div>
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="copyright">
-						&copy; Copyright Reserved to <span class="text-color">Baguette N' Wargame</span> by <a href="https://themefisher.com/" target="_blank">Themefisher</a>
+						&copy; Copyright Reserved to <span class="text-color">Baguette N' Wargame</span> by <a href="#" target="_blank">Themefisher</a>
 					</div>
 				</div>
 				<div class="col-lg-6 text-left text-lg-right">
